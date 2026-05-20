@@ -29,6 +29,10 @@ specificationVersion: '0.19'
 kind: company
 apis: []
 common:
+  - type: GitHubOrganization
+    url: https://github.com/concentrix
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/concentrix
   - type: Website
     url: https://www.concentrix.com
   - type: iX Product Suite
