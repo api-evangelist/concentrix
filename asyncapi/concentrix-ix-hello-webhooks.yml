@@ -1,0 +1,46 @@
+generated: '2026-09-05'
+method: searched
+source: https://docs.ixhello.com/ixhc2/integrations/outbound-calling-api-user-guide
+spec_type: null
+asyncapi_published: false
+note: >-
+  Concentrix publishes no AsyncAPI document. It does publish a real, fully specified webhook
+  surface for the iX Hello Customer v2 Outbound Calling API — three lifecycle events with example
+  payloads, an HMAC-SHA256 signature scheme and a stated delivery guarantee — captured verbatim
+  below. Nothing here is generated: every field appears in the provider's own documentation.
+webhooks:
+  subscription:
+    model: per-request — the caller passes webhookUrl on the call-initiation request; there is no
+      subscription-management API and no webhook endpoint registry
+    field: webhookUrl
+    requirement: required when mode is "webhook"; must be HTTPS (a non-HTTPS value returns 400 INVALID_WEBHOOK_URL)
+    transport: HTTP POST, Content-Type application/json
+  security:
+    header: X-Signature
+    format: sha256=<hex>
+    algorithm: HMAC-SHA256
+    secret: the caller-supplied webhookAuth value from the initiation request
+    computation: HMAC-SHA256(webhookAuth, rawRequestBody)
+    caveats:
+      - webhookAuth is not forwarded as an Authorization header, so it cannot gate access at the receiver on its own
+      - if webhookAuth is omitted the callback is still sent, signed with an empty secret (effectively unsigned)
+      - provider recommends IP allowlisting or a secret path segment in addition to signature verification
+  delivery:
+    guarantee: best-effort
+    retries: none — a non-2xx response or connection timeout is logged and not retried in the initial implementation
+    fallback: call status remains queryable via GET /cgw/outbound/v1/orgs/{orgId}/calls/{sessionId}
+    ordering: call.answered precedes call.failed when a call fails after being answered
+  events:
+    - name: call.answered
+      fired_when: the recipient picks up
+      payload_fields: [event, sessionId, flowId, status, callAnalysisResult, metadata, answeredAt]
+      notes: callAnalysisResult present only when callAnalysis was supplied on the request
+    - name: call.failed
+      fired_when: the call fails at any stage — not answered, busy, fax detected, or flow error
+      payload_fields: [event, sessionId, flowId, status, failureReason, metadata, completedAt]
+      notes: failureReason takes one of the nine documented values in errors/concentrix-problem-types.yml
+    - name: call.completed
+      fired_when: the flow ends normally (Completed terminal state)
+      payload_fields: [event, sessionId, flowId, status, durationSeconds, callAnalysisResult, metadata, answeredAt, completedAt]
+      notes: callAnalysisResult is echoed from the earlier call.answered payload
+docs: https://docs.ixhello.com/ixhc2/integrations/outbound-calling-api-user-guide

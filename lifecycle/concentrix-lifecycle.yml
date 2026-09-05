@@ -1,0 +1,45 @@
+generated: '2026-09-05'
+method: searched
+source: https://docs.ixhello.com/ixhc2/integrations/outbound-calling-api-user-guide
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://docs.ixhello.com/ixhc2/integrations/executing-flow-via-api-headless-execution
+  policy_published: false
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: >-
+    No deprecation policy, no Sunset/Deprecation header support (RFC 8594), and no deprecated
+    operations are documented for the iX Hello Customer v2 APIs. Recorded as an honest absence.
+sla:
+  url: null
+  uptime_target: null
+  note: No public SLA or uptime commitment is published for iX Hello.
+status_page:
+  url: https://ixhellosidekick.statuspage.io/
+  platform: Atlassian Statuspage
+  title: ixHello Employee Internal Status
+  machine_readable:
+    - {path: /api/v2/status.json, status: 200}
+    - {path: /api/v2/summary.json, status: 200}
+    - {path: /api/v2/components.json, status: 200}
+    - {path: /history.rss, status: 200}
+  probed: '2026-09-05'
+  note: >-
+    Publicly reachable Statuspage covering iX Hello Employee, discovered from
+    ixHelloStatusPageIOUrl in the iX Hello app config at https://www.ixhello.com/api/config. Its
+    own title says "Employee Internal", and it does not cover the iX Hello Customer v2 APIs — so
+    it is a real status surface for one product, not a platform-wide one.
+changelog:
+  url: null
+  note: >-
+    No dated changelog or release-notes page appears anywhere in the 459-entry documentation index
+    at https://docs.ixhello.com/llms.txt. Release numbers surface only as inline hints inside
+    feature pages (e.g. "In release 1.3 the Request Body field is located below ...").
+flow_versioning:
+  note: >-
+    iX Hello Customer v2 documents branch-based version history for the flows a customer authors
+    (https://docs.ixhello.com/ixhc2/flows/flow-editor/flow-versioning-branch-based-history) — that
+    is product content versioning, not API contract versioning.
+deprecated_operations: []

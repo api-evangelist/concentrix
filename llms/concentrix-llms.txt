@@ -1,0 +1,28 @@
+# Concentrix llms.txt
+# This file provides crawling and usage guidelines for AI agents, LLMs, and AI search systems
+
+# === General Policy ===
+Allow: /
+
+# === Restricted Content (do not crawl or use) ===
+Disallow: /wp-admin/
+Disallow: /privacy-policy/
+Disallow: /terms-of-use/
+Disallow: /legal/
+Disallow: /confidential/
+
+# === Priority Content (please index / surface) ===
+Allow: /services-solutions/
+Allow: /industries/
+Allow: /insights/
+Allow: /case-studies/
+Allow: /news/
+Allow: /about/
+Allow: /what-we-do/
+
+# === Attribution & Source ===
+Attribution: required
+Attribution-URL: https://www.concentrix.com/
+
+# === Contact for Crawlers ===
+Contact: stephan.rachuk@concentrix.com

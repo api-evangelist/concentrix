@@ -1,0 +1,35 @@
+generated: '2026-09-05'
+method: searched
+source: https://docs.ixhello.com/ixhc2/integrations/executing-flow-via-api-headless-execution/universal-messaging-api
+note: >-
+  iX Hello Customer v2 publishes a separate non-production API base URL alongside production. That
+  is the whole of the published test surface: there is no self-service sandbox signup, no test-mode
+  key prefix, no magic test identifiers, no fixture or trigger tooling, and no time simulation.
+  Access to either environment requires an organization API key issued by the product team, so the
+  demo host is a provisioned environment rather than an open sandbox. No test values are invented
+  here — none are published.
+environments:
+  - name: production
+    base_url: https://api.vnext.ixhello.com
+    reachable: true
+    probed_status: 404
+    probe_note: root returns a JSON 404 from the API gateway (host is live; no unauthenticated route)
+  - name: demo
+    base_url: https://api.demo.vnext.ixhello.com
+    reachable: true
+    probed_status: 404
+    probe_note: root returns a JSON 404 from the API gateway (host is live; no unauthenticated route)
+key_separation:
+  test_key_prefix: null
+  live_key_prefix: null
+  note: >-
+    Keys are organization-scoped bearer tokens with no documented environment prefix; the caller
+    selects the environment by base URL, not by key.
+test_values: []
+test_clock: false
+fixtures_or_triggers: false
+self_service_signup: false
+console:
+  url: https://www.ixhello.com/
+  note: The iX Hello application itself is the console; it is behind Azure AD B2C sign-in.
+probed: '2026-09-05'

@@ -1,0 +1,46 @@
+generated: '2026-09-05'
+method: searched
+source: https://docs.ixhello.com/ixhc2/deployments/chat-widgets
+note: >-
+  iX Hello ships embeddable client-side surfaces rather than a component library on a CDN: a
+  configurable webchat widget embedded on the customer's own site, a shareable direct chat link,
+  a full-screen digital-assistant / avatar surface with a kiosk mode, and embedded reporting.
+  No loader script URL, package name or pinned version is published anywhere in the documentation —
+  the embed snippet is produced inside the iX Hello console at deploy time — so this artifact
+  records the component families and their published configuration contract, not a script tag we
+  did not see.
+families:
+  - name: Chat Widget
+    product: iX Hello Customer v2
+    kind: embeddable web chat
+    docs: https://docs.ixhello.com/ixhc2/deployments/chat-widgets
+    configuration:
+      - {setting: Name, description: unique identifier used to reference the widget from a flow deployment}
+      - {setting: Allowed Domains, description: 'explicit list of fully-qualified https:// URLs where the widget may run; wildcards are NOT supported and a widget embedded on an unlisted site will not load'}
+      - {setting: Widget Title, description: text in the chat header}
+      - {setting: Primary Color, description: header/button/accent brand color}
+      - {setting: Secondary Color, description: background/highlight color}
+      - {setting: Avatar, description: 'PNG, exactly 200x200px, max 200 KB; saved separately from the other appearance settings'}
+    operational_note: appearance changes are cached and can take up to 24 hours to appear on live sites, while the in-console preview updates immediately
+    deployment: connected to a flow via Deployments -> deploy a flow (https://docs.ixhello.com/ixhc2/flows/deploy-flow)
+  - name: Webchat Assistant
+    product: iX Hello Customer (v1)
+    kind: embeddable web chat
+    docs: https://docs.ixhello.com/ixhc/general/ix-hello-basic-mode/webchat-assistant
+    variants:
+      - {name: Direct Chat Link, docs: https://docs.ixhello.com/ixhc/general/ix-hello-basic-mode/webchat-assistant/direct-chat-link, description: hosted standalone chat URL shareable without embedding}
+      - {name: Embedded Chat Assistant, docs: https://docs.ixhello.com/ixhc/general/ix-hello-basic-mode/webchat-assistant/embedded-chat-assistant, description: assistant embedded inside a host page}
+  - name: Digital Assistant
+    product: iX Hello Customer (v1)
+    kind: hosted full-surface assistant
+    docs: https://docs.ixhello.com/ixhc/general/ix-hello-basic-mode/digital-assistant
+    variants:
+      - {name: Digital Avatar, docs: https://docs.ixhello.com/ixhc/general/ix-hello-basic-mode/digital-assistant/digital-avatar}
+      - {name: Kiosk Mode, docs: https://docs.ixhello.com/ixhc/general/ix-hello-basic-mode/digital-assistant/kiosk-mode}
+  - name: Embedded reporting
+    product: iX Hello Reporting (Premium)
+    kind: embedded dashboard
+    docs: https://docs.ixhello.com/ix-hello-reporting/premium-reporting/tableau-embedded-toolbar
+    note: Tableau-backed embedded reporting toolbar — third-party render surface exposed inside the product
+loader_libraries: []
+registry_distribution: none

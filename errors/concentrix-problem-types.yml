@@ -1,0 +1,82 @@
+generated: '2026-09-05'
+method: searched
+source: https://docs.ixhello.com/ixhc2/integrations/outbound-calling-api-user-guide
+format: vendor-envelope
+rfc9457: false
+envelope:
+  shape: '{"error": {"code": "ERROR_CODE", "message": "Human-readable description"}}'
+  fields:
+    - {name: error.code, type: string, description: stable machine-readable error code}
+    - {name: error.message, type: string, description: human-readable description}
+  note: >-
+    Documented as "All endpoints use a consistent error envelope" for the iX Hello Customer v2
+    Outbound Calling API. The headless flow-execution endpoint documents a flatter shape
+    ({"error": "Failed to execute flow <id>"}), so the envelope is consistent within the outbound
+    surface but not yet uniform across every documented endpoint.
+problems:
+  - status: 400
+    code: INVALID_REQUEST
+    title: Malformed request body or missing required fields
+    surface: outbound-calling
+  - status: 400
+    code: INVALID_DESTINATION
+    title: destinationNumber is not a valid E.164 number or SIP address
+    surface: outbound-calling
+  - status: 400
+    code: INVALID_WEBHOOK_URL
+    title: webhookUrl is missing, not HTTPS, or otherwise invalid
+    surface: outbound-calling
+  - status: 401
+    code: AUTH_HEADER_MISSING
+    title: Authorization header was not provided
+    surface: outbound-calling
+  - status: 401
+    code: INVALID_TOKEN
+    title: API key is invalid, revoked, or expired
+    surface: outbound-calling
+  - status: 403
+    code: PERMISSION_DENIED
+    title: Org does not have the outbound_calling permission, or the flow belongs to a different org
+    surface: outbound-calling
+  - status: 404
+    code: NOT_FOUND
+    title: Session identifier not found
+    surface: outbound-calling
+  - status: 429
+    code: RATE_LIMIT_EXCEEDED
+    title: API Gateway request throttle exceeded
+    surface: outbound-calling
+  - status: 504
+    code: SYNC_TIMEOUT
+    title: 'sync mode only: call did not complete within the maximum API Gateway timeout (30 s)'
+    surface: outbound-calling
+  - status: 400
+    title: Invalid request body or missing required variables
+    surface: headless-flow-execution
+    source_doc: https://docs.ixhello.com/ixhc2/integrations/executing-flow-via-api-headless-execution
+  - status: 401
+    title: Invalid or missing bearer token
+    surface: headless-flow-execution
+    source_doc: https://docs.ixhello.com/ixhc2/integrations/executing-flow-via-api-headless-execution
+  - status: 404
+    title: ORG_ID or FLOW_ID not found
+    surface: headless-flow-execution
+    source_doc: https://docs.ixhello.com/ixhc2/integrations/executing-flow-via-api-headless-execution
+  - status: 500
+    title: Unexpected issue during execution
+    surface: headless-flow-execution
+    source_doc: https://docs.ixhello.com/ixhc2/integrations/executing-flow-via-api-headless-execution
+call_failure_reasons:
+  note: >-
+    Not HTTP errors — the failureReason field on a terminal call outcome (sync response, poll
+    status, and the call.failed webhook payload).
+  values:
+    - {value: no_answer, meaning: destination did not answer within the ring timeout (default 30 s)}
+    - {value: busy, meaning: destination was busy}
+    - {value: trunk_unavailable, meaning: no telephony trunk was available at call time}
+    - {value: unroutable_number, meaning: destination number could not be routed (e.g. invalid region)}
+    - {value: session_start_failed, meaning: runtime engine could not create a session on connection (flow not found or invalid flow configuration)}
+    - {value: flow_error, meaning: unrecoverable error during flow execution after the session started}
+    - {value: fax, meaning: answering-machine detection found a fax machine; call terminated without a flow session}
+    - {value: answering_machine, meaning: AMD detected an answering machine and "answering_machine" was not in the callAnalysis array}
+    - {value: unknown, meaning: AMD result was inconclusive and "unknown" was not in the callAnalysis array}

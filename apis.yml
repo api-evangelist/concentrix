@@ -24,85 +24,207 @@ accessModel:
   source: []
   generated: '2026-07-22'
   method: derived
-position: Consuming
+position: Producing
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/concentrix.png
 description: >-
-  Concentrix is a global technology and services leader providing customer
-  experience (CX) management, digital transformation, and technology
-  consulting across approximately 2,000 brands worldwide. Its product
-  suite spans the iX product line (including iX Hello and iX Hero
-  agentic AI assistants) and the Catalyst experience transformation and
-  technology consultancy. Concentrix does not publish a public developer
-  API; the iX product suite and Catalyst services are delivered via
-  managed engagements and enterprise integrations rather than a
-  self-service developer portal.
+  Concentrix is a global technology and services company delivering customer experience
+  management, digital transformation and technology consulting for roughly 2,000 brands. Its
+  product line is the iX suite — iX Hello (customer- and employee-facing AI assistants), iX Hero
+  (an agent desktop) and iX Hello Customer v2 (a flow-based conversational platform) — alongside
+  Catalyst, its experience and engineering consultancy. iX Hello Customer v2 is the one genuinely
+  callable surface: Concentrix publishes REST APIs on api.vnext.ixhello.com for headless flow
+  execution, stateful conversational sessions and programmatic outbound PSTN/SIP calling, with
+  signed webhook callbacks, documented at docs.ixhello.com. There is no OpenAPI, no SDK, no
+  self-service signup and no published pricing — keys are issued per organization by the product
+  team, so the API is real but sales-gated.
 tags:
   - AI Agents
   - Business Process Outsourcing
   - Consulting
+  - Conversational AI
   - Customer Experience
   - Digital Transformation
   - Enterprise Services
+  - Contact Center
+  - Voice
+  - Webhooks
   - Fortune 500
 created: '2026-03-21'
-modified: '2026-04-28'
+modified: '2026-09-05'
 specificationVersion: '0.23'
 kind: company
-apis: []
+apis:
+  - name: iX Hello Customer v2 Universal Messaging API
+    description: >-
+      Headless flow-execution API for iX Hello Customer v2. Starts a stateful conversational
+      session against an authored flow, sends user turns into it, reads accumulated session
+      variables, and terminates the session — all over REST, with no chat or voice front end
+      attached. Injects context variables at session start, returns the flow's messages and wait
+      state on every turn, and correlates back to the caller's own system through an opaque
+      metadata block. Organization-scoped bearer API keys; sessions live at most one hour.
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/concentrix.png
+    humanURL: https://docs.ixhello.com/ixhc2/integrations/executing-flow-via-api-headless-execution/universal-messaging-api
+    baseURL: https://api.vnext.ixhello.com
+    tags:
+      - AI Agents
+      - Conversational AI
+      - Customer Experience
+      - Chatbots
+      - Workflow Automation
+      - Contact Center
+    properties:
+      - type: Documentation
+        url: https://docs.ixhello.com/ixhc2/integrations/executing-flow-via-api-headless-execution
+      - type: APIReference
+        url: https://docs.ixhello.com/ixhc2/integrations/executing-flow-via-api-headless-execution/universal-messaging-api
+      - type: Authentication
+        url: authentication/concentrix-authentication.yml
+      - type: Conventions
+        url: conventions/concentrix-conventions.yml
+      - type: ErrorCatalog
+        url: errors/concentrix-problem-types.yml
+      - type: DataModel
+        url: data-model/concentrix-data-model.yml
+      - type: RateLimits
+        url: rate-limits/concentrix-rate-limits.yml
+      - type: Sandbox
+        url: sandbox/concentrix-sandbox.yml
+  - name: iX Hello Customer v2 Outbound Calling API
+    description: >-
+      Places outbound PSTN and SIP voice calls programmatically and runs an authored iX Hello flow
+      on the call. Three result-delivery modes — synchronous (connection held to a 30 second
+      gateway timeout), polling, and signed webhook callbacks on call.answered / call.failed /
+      call.completed. Optional answering-machine detection gates whether a flow session is created
+      at all. Organization-scoped bearer API keys; two operations, initiate and get status.
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/concentrix.png
+    humanURL: https://docs.ixhello.com/ixhc2/integrations/outbound-calling-api-user-guide
+    baseURL: https://api.vnext.ixhello.com
+    tags:
+      - Voice
+      - Outbound Calling
+      - Telephony
+      - Conversational AI
+      - Contact Center
+      - Webhooks
+    properties:
+      - type: Documentation
+        url: https://docs.ixhello.com/ixhc2/integrations/outbound-calling-api
+      - type: APIReference
+        url: https://docs.ixhello.com/ixhc2/integrations/outbound-calling-api-user-guide
+      - type: Authentication
+        url: authentication/concentrix-authentication.yml
+      - type: Conventions
+        url: conventions/concentrix-conventions.yml
+      - type: ErrorCatalog
+        url: errors/concentrix-problem-types.yml
+      - type: Webhooks
+        url: asyncapi/concentrix-ix-hello-webhooks.yml
+      - type: DataModel
+        url: data-model/concentrix-data-model.yml
+      - type: RateLimits
+        url: rate-limits/concentrix-rate-limits.yml
+      - type: Sandbox
+        url: sandbox/concentrix-sandbox.yml
 common:
+  - type: Website
+    url: https://www.concentrix.com
+  - type: Documentation
+    url: https://docs.ixhello.com/
+  - type: APIReference
+    url: https://docs.ixhello.com/ixhc2/integrations/outbound-calling-api-user-guide
+  - type: GettingStarted
+    url: https://docs.ixhello.com/welcome-to-ix-hello
+  - type: Support
+    url: https://docs.ixhello.com/ixhc2/administration/support
+  - type: StatusPage
+    url: https://ixhellosidekick.statuspage.io/
+  - type: LLMsTxt
+    url: llms/concentrix-llms.txt
+  - type: LLMsTxt
+    url: llms/concentrix-ixhello-llms.txt
+  - type: WellKnown
+    url: well-known/concentrix-well-known.yml
+  - type: Authentication
+    url: authentication/concentrix-authentication.yml
+  - type: Conventions
+    url: conventions/concentrix-conventions.yml
+  - type: ErrorCatalog
+    url: errors/concentrix-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/concentrix-lifecycle.yml
+  - type: RateLimits
+    url: rate-limits/concentrix-rate-limits.yml
+  - type: Plans
+    url: plans/concentrix-plans-pricing.yml
+  - type: Webhooks
+    url: asyncapi/concentrix-ix-hello-webhooks.yml
+  - type: DataModel
+    url: data-model/concentrix-data-model.yml
+  - type: Components
+    url: components/concentrix-components.yml
+  - type: Sandbox
+    url: sandbox/concentrix-sandbox.yml
+  - type: Conformance
+    url: conformance/concentrix-conformance.yml
   - type: DomainSecurity
     url: security/concentrix-domain-security.yml
   - type: GitHubOrganization
-    url: https://github.com/concentrix
+    url: https://github.com/Concentrix
   - type: LinkedIn
     url: https://www.linkedin.com/company/concentrix
-  - type: Website
-    url: https://www.concentrix.com
-  - type: iX Product Suite
+  - type: Solutions
     url: https://www.concentrix.com/ix-product-suite/
-  - type: iX Hello
+  - type: Solutions
     url: https://www.concentrix.com/ix-hello/
-  - type: iX Hero
+  - type: Solutions
     url: https://www.concentrix.com/ix-hero/
-  - type: Catalyst
+  - type: Solutions
     url: https://www.concentrix.com/catalyst/
   - type: Newsroom
-    url: https://www.concentrix.com/about/news/
-  - type: Investor Relations
-    url: https://investor.concentrix.com
+    url: https://www.concentrix.com/news/
+  - type: InvestorRelations
+    url: https://ir.concentrix.com/
   - type: Careers
     url: https://www.concentrix.com/careers/
   - type: Contact
-    url: https://www.concentrix.com/contact-us/
+    url: https://www.concentrix.com/contact/
+  - type: About
+    url: https://www.concentrix.com/legal/
   - type: PrivacyPolicy
     url: https://www.concentrix.com/privacy-policy/
   - type: TermsOfService
-    url: https://www.concentrix.com/terms-of-use/
-  - type: Integrations
-    url: https://www.concentrix.com/integrations/
-  - url: https://www.concentrix.com/feed/
-    type: Blog
+    url: https://www.concentrix.com/wp-content/uploads/2024/04/Concentrix-Website-Terms-of-Use.pdf
+  - type: Login
+    url: https://www.ixhello.com/
+  - type: Blog
+    url: https://www.concentrix.com/feed/
 integrations:
-  - name: Concentrix
-  - name: English (US)
-  - name: 简体中文 flag
-  - name: Nederlands flag
-  - name: English (GB) flag
-  - name: English (US) flag
-  - name: Français flag
-  - name: Deutsch flag
-  - name: Indonesia flag
-  - name: Italiano flag
-  - name: 日本語 flag
-  - name: 한국어 flag
-  - name: Português flag
-  - name: Español (EU) flag
-  - name: Español (LATAM) flag
-  - name: ไทย flag
-  - name: Türkçe flag
-  - name: Tiếng Việt flag
-  - name: Think Human Fund
+  # Connections and channels iX Hello documents at docs.ixhello.com (llms.txt index, 2026-09-05).
+  # Replaces a prior scrape that had captured the site's language switcher as integration names.
+  - name: Salesforce
+  - name: Genesys Cloud
+  - name: Zendesk
+  - name: Amazon Lex
+  - name: Amazon Connect
+  - name: Amazon Chime
+  - name: Amazon Alexa
+  - name: AWS Lambda
+  - name: Microsoft Office 365
+  - name: Microsoft Teams
+  - name: Microsoft SharePoint
+  - name: Confluence
+  - name: PostgreSQL
+  - name: Google OAuth 2.0
+  - name: Twilio
+  - name: Zoom
+  - name: Tableau
+  - name: Model Context Protocol (MCP)
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-09-05'
+  status: enriched
+  artifacts_added: 17
+  pass: local-v3

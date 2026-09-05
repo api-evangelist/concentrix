@@ -1,0 +1,22 @@
+generated: '2026-09-05'
+method: searched
+source: https://aws.amazon.com/marketplace/pp/prodview-3bamvmhjhkx7e
+plan_count: 0
+note: >-
+  Concentrix publishes no plans, tiers or list prices for any product. concentrix.com has no
+  /pricing page (the full 2,146-URL page sitemap contains none), and the AWS Marketplace listing
+  for iX Hello — the one commercial storefront Concentrix operates — states "Pricing is based on
+  your specific requirements and eligibility. To get a custom quote for your needs, request a
+  private offer" and is delivered as "Professional services", not a metered SaaS subscription.
+  This is a sales-gated, contact-us commercial model; recorded as plan_count 0 rather than omitted.
+plans: []
+evidence:
+  - {url: 'https://aws.amazon.com/marketplace/pp/prodview-3bamvmhjhkx7e', status: 200, finding: 'private offer only; no dimensions or unit prices listed'}
+  - {url: 'https://www.concentrix.com/sitemap_index.xml', status: 200, finding: 'no pricing page in any of the three page sitemaps'}
+  - {url: 'https://marketplace.microsoft.com/en-us/product/saas/concentrixcorporation1717086605714.ixhellosaas', status: 200, finding: 'Microsoft Marketplace SaaS listing for iX Hello — contact-based'}
+related_consumption_model:
+  name: iX Hello token allowance
+  docs: https://docs.ixhello.com/ixhello/administration/token-requests
+  note: >-
+    iX Hello meters usage in model tokens with a per-customer allocation and an in-product request
+    process for more; the allocation size and its price are not published.

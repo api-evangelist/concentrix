@@ -1,13 +1,24 @@
-generated: '2026-07-11'
+generated: '2026-09-05'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
 - host: www.concentrix.com
   https: true
   tls_version: TLSv1.3
-  cert_expires: Sep 13 18:10:56 2026 GMT
+  cert_expires: Nov 23 18:41:18 2026 GMT
   hsts: true
   hsts_max_age: 31536000
+- host: docs.ixhello.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov 20 10:35:35 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+- host: api.vnext.ixhello.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Jan 26 23:59:59 2027 GMT
+  hsts: null
 domains:
 - domain: concentrix.com
   dnssec: false
@@ -15,3 +26,9 @@ domains:
   spf: true
   dmarc: true
   dmarc_policy: quarantine
+- domain: ixhello.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none

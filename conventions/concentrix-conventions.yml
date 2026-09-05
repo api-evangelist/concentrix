@@ -1,0 +1,120 @@
+generated: '2026-09-05'
+method: searched
+source: https://docs.ixhello.com/ixhc2/integrations/outbound-calling-api-user-guide
+docs:
+  - https://docs.ixhello.com/ixhc2/integrations/executing-flow-via-api-headless-execution
+  - https://docs.ixhello.com/ixhc2/integrations/executing-flow-via-api-headless-execution/universal-messaging-api
+  - https://docs.ixhello.com/ixhc2/integrations/outbound-calling-api-user-guide
+scope: iX Hello Customer v2 public APIs (Universal Messaging / headless flow execution, Outbound Calling)
+authentication:
+  style: bearer API key in the Authorization header, scoped to one organization
+  detail: see authentication/concentrix-authentication.yml
+versioning:
+  scheme: uri-path
+  current: v1
+  pattern: /cgw/{service}/v1/orgs/{orgId}/...
+  services: [process, outbound]
+  policy_published: false
+  note: v1 appears in every documented path; Concentrix publishes no written versioning or deprecation policy for these APIs.
+base_urls:
+  production: https://api.vnext.ixhello.com
+  demo: https://api.demo.vnext.ixhello.com
+  note: >-
+    The headless-execution page describes BASE_URL as "the URL of the API Gateway hosting your
+    instance", provided by the product team; the Universal Messaging page publishes the two hosts
+    above explicitly.
+pagination:
+  supported: false
+  note: No list endpoint is documented on either public API — every documented operation addresses a single session or call by id, so no pagination contract exists to capture.
+idempotency:
+  supported: false
+  coverage: none
+  mechanism: null
+  header: null
+  note: >-
+    No idempotency key, request-deduplication window, or replay-protection mechanism is documented
+    on either write surface. POST /calls initiates a real outbound telephone call and POST
+    /flows/{flowId}/execute starts a real flow run; a retried request after a timeout will do it
+    again. The caller-supplied metadata.externalSessionId is a correlation label the platform
+    echoes back — it is explicitly NOT used for deduplication anywhere in the documentation.
+reversibility:
+  grade: documented
+  note: >-
+    One of the two write surfaces publishes an explicit reversal operation with a stated window;
+    the other publishes none. Never asserted beyond what the docs state.
+  surfaces:
+    - write: Start Session (POST /cgw/process/v1/orgs/{orgId}/flows/{flowId}/sessions)
+      reversal: End Session (DELETE /cgw/process/v1/orgs/{orgId}/sessions/{sessionId})
+      operationId: null
+      window: >-
+        Any time before the session expires. "Sessions are valid for maximum of 1 hour"; the
+        Start Session response returns expiresAt.
+      effect: >-
+        Flow execution is aborted and session state is cleaned up; status becomes "terminated"
+        with reason "client_requested". Session variables are NOT returned on termination — call
+        Get Session first if the context is needed.
+      docs: https://docs.ixhello.com/ixhc2/integrations/executing-flow-via-api-headless-execution/universal-messaging-api
+      grade: verified
+    - write: Initiate Outbound Call (POST /cgw/outbound/v1/orgs/{orgId}/flows/{flowId}/calls)
+      reversal: null
+      window: null
+      effect: >-
+        No cancel, hangup, or abort operation is documented. Only two endpoints exist on this
+        service — initiate and get status — and the docs state "No scheduling (calls executed
+        immediately)". A placed call cannot be recalled through the API.
+      docs: https://docs.ixhello.com/ixhc2/integrations/outbound-calling-api-user-guide
+      grade: none
+    - write: Execute Flow (POST /cgw/process/v1/orgs/{orgId}/flows/{flowId}/execute)
+      reversal: null
+      window: null
+      effect: Fire-and-forget headless execution; the endpoint reports execution status only and documents no abort.
+      docs: https://docs.ixhello.com/ixhc2/integrations/executing-flow-via-api-headless-execution
+      grade: none
+dry_run_mode:
+  supported: false
+  note: >-
+    No dry-run/simulate parameter is documented. The nearest published rehearsal surface is the
+    separate demo base URL (https://api.demo.vnext.ixhello.com) — a different environment, not a
+    no-op mode on production. See sandbox/concentrix-sandbox.yml.
+request_tracing:
+  request_id_header: null
+  correlation: >-
+    metadata.externalSessionId — a caller-supplied opaque id echoed verbatim in the 201, the sync
+    200, the GET status response and every webhook callback. sessionId is the platform-assigned
+    identifier for the session or call and is the key for every follow-up read.
+  note: No X-Request-Id / trace header is documented on responses.
+error_envelope:
+  shape: '{"error": {"code": "...", "message": "..."}}'
+  detail: see errors/concentrix-problem-types.yml
+rate_limit_signaling:
+  headers: []
+  status_on_exhaustion: 429
+  code: RATE_LIMIT_EXCEEDED
+  note: >-
+    A 429 with code RATE_LIMIT_EXCEEDED ("API Gateway request throttle exceeded") is documented,
+    but no numeric limit, window, and no RateLimit-* / Retry-After response header is published.
+    See rate-limits/concentrix-rate-limits.yml.
+async_delivery:
+  modes: [sync, poll, webhook]
+  sync: connection held open until terminal state or the 30 s API Gateway timeout (then 504 SYNC_TIMEOUT); the call continues and stays queryable
+  poll: returns 201 immediately with sessionId and status Queued; caller polls GET /calls/{sessionId}
+  webhook: returns 201 immediately; platform POSTs call.answered / call.failed / call.completed to webhookUrl
+  delivery_guarantee: best-effort — a failed callback (non-2xx or timeout) is logged and NOT retried in the initial implementation
+  session_affinity: documented for poll mode
+metadata:
+  supported: true
+  field: metadata
+  semantics: opaque key-value pairs for the caller's own correlation; echoed verbatim in all responses and callbacks; NOT injected into the flow as session variables
+field_expansion:
+  supported: false
+session_lifetime:
+  max: 1 hour
+  states: [awaiting_input, awaiting_transfer, completed, terminated]
+  call_states: [Queued, Ringing, Answered, Completed, Failed]
+cross_links:
+  authentication: authentication/concentrix-authentication.yml
+  errors: errors/concentrix-problem-types.yml
+  lifecycle: lifecycle/concentrix-lifecycle.yml
+  rate_limits: rate-limits/concentrix-rate-limits.yml
+  webhooks: asyncapi/concentrix-ix-hello-webhooks.yml
+  sandbox: sandbox/concentrix-sandbox.yml

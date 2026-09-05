@@ -1,0 +1,96 @@
+generated: '2026-09-05'
+method: derived
+source: >-
+  docs.ixhello.com iX Hello Customer v2 API pages (universal-messaging-api,
+  executing-flow-via-api-headless-execution, outbound-calling-api-user-guide) — derived from the
+  documented request/response payloads, path parameters and field tables, NOT from an OpenAPI
+  (Concentrix publishes none).
+note: >-
+  Every entity, field and relationship below appears verbatim in the provider's documented payloads
+  or path templates. Types are the ones the docs state; where the docs do not state a type it is
+  left null rather than guessed.
+entities:
+  - name: Organization
+    id_field: orgId
+    id_type: UUID
+    description: Tenant boundary. Every documented path is rooted at /orgs/{orgId}, and the API key is validated against the orgId in the path on every request.
+    fields:
+      - {name: orgId, type: UUID}
+      - {name: orgName, type: string, source: 'claim in the Azure AD B2C id_token (claims_supported)'}
+  - name: Flow
+    id_field: flowId
+    id_type: UUID
+    description: An authored conversational flow. Executed headlessly, started as a session, or run during an outbound call.
+    fields:
+      - {name: flowId, type: UUID}
+  - name: Session
+    id_field: sessionId
+    id_type: UUID
+    description: A stateful run of a flow via the Universal Messaging API; text-only; expires after at most one hour.
+    fields:
+      - {name: sessionId, type: UUID}
+      - {name: flowId, type: UUID}
+      - {name: status, type: enum, values: [awaiting_input, awaiting_transfer, completed, terminated]}
+      - {name: variables, type: object, description: session context variables — injected at start plus anything set by the flow}
+      - {name: metadata, type: object}
+      - {name: 'metadata.externalSessionId', type: string}
+      - {name: 'metadata.channel', type: string, default: api}
+      - {name: messageCount, type: integer}
+      - {name: createdAt, type: date-time}
+      - {name: expiresAt, type: date-time}
+      - {name: lastActivityAt, type: date-time}
+      - {name: completedAt, type: date-time}
+      - {name: terminatedAt, type: date-time}
+      - {name: reason, type: string, example: client_requested}
+  - name: Message
+    id_field: id
+    description: One message emitted by or sent into a session.
+    fields:
+      - {name: id, type: string, example: msg-001}
+      - {name: type, type: enum, values: [text, output, end]}
+      - {name: text, type: string}
+  - name: Call
+    id_field: sessionId
+    id_type: UUID
+    description: An outbound PSTN/SIP call that executes a flow. Shares the sessionId identifier space with Session.
+    fields:
+      - {name: sessionId, type: UUID}
+      - {name: flowId, type: UUID}
+      - {name: status, type: enum, values: [Queued, Ringing, Answered, Completed, Failed]}
+      - {name: destinationNumber, type: string, format: 'E.164 or sip: URI'}
+      - {name: callerId, type: string}
+      - {name: mode, type: enum, values: [sync, poll, webhook]}
+      - {name: variables, type: object, description: injected into the flow as session variables; not echoed in responses}
+      - {name: callAnalysis, type: 'string[]', values: [live_person, answering_machine]}
+      - {name: callAnalysisResult, type: enum, values: [live_person, answering_machine, fax, unknown]}
+      - {name: failureReason, type: enum, description: see errors/concentrix-problem-types.yml call_failure_reasons}
+      - {name: durationSeconds, type: integer}
+      - {name: webhookUrl, type: string, format: https url}
+      - {name: webhookAuth, type: string, description: write-only shared secret; stored encrypted, never returned}
+      - {name: metadata, type: object, description: opaque, echoed verbatim in every response and callback}
+      - {name: createdAt, type: date-time}
+      - {name: answeredAt, type: date-time}
+      - {name: completedAt, type: date-time}
+  - name: WebhookEvent
+    id_field: null
+    description: Lifecycle callback POSTed to the caller's webhookUrl; signed with X-Signature.
+    fields:
+      - {name: event, type: enum, values: [call.answered, call.failed, call.completed]}
+      - {name: sessionId, type: UUID}
+      - {name: flowId, type: UUID}
+      - {name: status, type: string}
+relationships:
+  - {from: Organization, to: Flow, kind: has_many, via: orgId}
+  - {from: Organization, to: Session, kind: has_many, via: orgId}
+  - {from: Organization, to: Call, kind: has_many, via: orgId}
+  - {from: Flow, to: Session, kind: has_many, via: flowId}
+  - {from: Flow, to: Call, kind: has_many, via: flowId}
+  - {from: Session, to: Message, kind: has_many, via: sessionId}
+  - {from: Session, to: Organization, kind: belongs_to, via: orgId}
+  - {from: Call, to: WebhookEvent, kind: has_many, via: sessionId}
+  - {from: Call, to: Flow, kind: belongs_to, via: flowId}
+id_conventions:
+  - {entity: Organization, form: UUID, example_shape: 3f6a1b2c-8e4d-4f9a-b7c5-1a2b3c4d5e6f}
+  - {entity: Flow, form: UUID}
+  - {entity: Session, form: UUID}
+  - {entity: Message, form: 'opaque string, msg-NNN in the published examples'}

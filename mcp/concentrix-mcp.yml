@@ -1,0 +1,29 @@
+generated: '2026-09-05'
+method: searched
+source: https://docs.ixhello.com/ixhc2/integrations/mcp
+status: none
+note: >-
+  Concentrix ships NO MCP server. iX Hello Customer v2 is an MCP *client*: its Integrations page
+  has an MCP connection type that points at somebody else's MCP endpoint, it browses
+  registry.modelcontextprotocol.io to find servers, it runs OAuth against them, and it
+  auto-generates two fixed internal methods (List Tools, Execute Tool) per connection so a flow's
+  Tools node can call another vendor's tools. That is consumption, not publication — the direction
+  matters and the catalog should not read it as an agent surface Concentrix offers.
+  No candidate tool list is derived either: there is no OpenAPI in this repo to ground one in, and
+  inventing tool names from prose would misrepresent both the tools and their input schemas.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+mcp_client_support:
+  role: client
+  docs: https://docs.ixhello.com/ixhc2/integrations/mcp
+  setup_tutorial: https://docs.ixhello.com/ixhc2/general/tutorials/mcp-connection-setup
+  registry_browsed: https://registry.modelcontextprotocol.io/
+  auth_types_supported: [none, oauth]
+  generated_methods: [List Tools, Execute Tool]
+  surfaced_in: Flow Designer "Tools" node, attachable to an Agent node; one agent node can aggregate tools from multiple MCP connections
+tools: []

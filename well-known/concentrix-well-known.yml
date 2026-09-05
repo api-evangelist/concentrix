@@ -1,0 +1,218 @@
+generated: '2026-09-05'
+method: searched
+source: live probes of every host this record knows, 2026-09-05
+note: >-
+  Concentrix serves no /.well-known/ discovery surface from its corporate domain or from the
+  iX Hello product hosts: every named path 404s on www.concentrix.com, docs.ixhello.com,
+  www.ixhello.com and the published iX Hello API gateway hosts. The ONE real document found is
+  the OpenID Connect discovery metadata for the Azure AD B2C tenant that fronts iX Hello sign-in
+  (ixadminprodk5.b2clogin.com), discovered from the b2cLogoutUrl published in the iX Hello app
+  config at https://www.ixhello.com/api/config. That tenant is Concentrix's own identity tenant,
+  which is why it is recorded here (same shape as an auth server hosted on a third-party domain).
+  ixhellosidekick.statuspage.io DOES serve a /.well-known/security.txt, but it is Atlassian's
+  platform-wide document (Contact security@atlassian.com, Canonical www.atlassian.com) and is NOT
+  a Concentrix publication, so that host is deliberately excluded from hosts[] below and no
+  SecurityTxt pointer is emitted.
+path_echo_control: passed
+hosts:
+  - host: https://www.concentrix.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/apis.json
+        status: 404
+      - path: /apis.json
+        status: 301
+      - path: /apis.yml
+        status: 301
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/aauth-resource.json
+        status: 404
+      - path: /.well-known/ucp.json
+        status: 404
+      - path: /.well-known/acp.json
+        status: 404
+      - path: /.well-known/concentrix-negative-control-7f3ab91c.json
+        status: 404
+        note: negative control — correctly 404s, so 404s on this host are trustworthy
+  - host: https://concentrix.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 301
+        note: apex redirects to www.concentrix.com; probed there
+      - path: /.well-known/apis.json
+        status: 301
+      - path: /apis.json
+        status: 301
+  - host: https://docs.ixhello.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/apis.json
+        status: 404
+      - path: /apis.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/concentrix-negative-control-7f3ab91c.json
+        status: 404
+        note: negative control — correctly 404s
+  - host: https://www.ixhello.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/apis.json
+        status: 404
+      - path: /apis.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/aauth-resource.json
+        status: 404
+      - path: /.well-known/concentrix-negative-control-7f3ab91c.json
+        status: 404
+        note: negative control — correctly 404s
+  - host: https://api.vnext.ixhello.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/apis.json
+        status: 404
+      - path: /apis.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/aauth-resource.json
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/concentrix-negative-control-7f3ab91c.json
+        status: 404
+        note: negative control — correctly 404s (JSON 404 body from the API gateway)
+  - host: https://api.demo.vnext.ixhello.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/concentrix-negative-control-7f3ab91c.json
+        status: 404
+        note: negative control — correctly 404s
+  - host: https://ixadminprodk5.b2clogin.com
+    note: >-
+      Concentrix's Azure AD B2C identity tenant for the iX platform (tenant
+      2c95ae7b-5bab-49e0-a483-62a3cd3867ba, user-flow b2c_1a_signup_signin). Named by the
+      b2cLogoutUrl in https://www.ixhello.com/api/config.
+    documents:
+      - path: /2c95ae7b-5bab-49e0-a483-62a3cd3867ba/b2c_1a_signup_signin/v2.0/.well-known/openid-configuration
+        status: 200
+        file: concentrix-openid-configuration.json
+      - path: /2c95ae7b-5bab-49e0-a483-62a3cd3867ba/b2c_1a_concentrix_negctl_7f3ab91c/v2.0/.well-known/openid-configuration
+        status: 404
+        note: negative control (non-existent user flow) — correctly 404s
+      - path: /2c95ae7b-5bab-49e0-a483-62a3cd3867ba/b2c_1a_signup_signin/v2.0/.well-known/concentrix-negative-control-7f3ab91c.json
+        status: 404
+        note: negative control — correctly 404s
+  - host: https://policies.ixplatform.ai
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/apis.json
+        status: 404
+      - path: /apis.json
+        status: 404
+  - host: https://www.ixplatform.ai
+    note: whole host sits behind Cloudflare Access (302 to concentrix.cloudflareaccess.com) — every path is gated
+    documents:
+      - path: /.well-known/security.txt
+        status: 302
+      - path: /.well-known/openid-configuration
+        status: 302
+      - path: /.well-known/agent-card.json
+        status: 302
+  - host: https://concentrixcx.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/apis.json
+        status: 404
+      - path: /apis.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/concentrix-negative-control-7f3ab91c.json
+        status: 404
+        note: negative control — correctly 404s
+  - host: https://us.customer.ixhello.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 400
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /.well-known/concentrix-negative-control-7f3ab91c.json
+        status: 404
+        note: negative control — correctly 404s
+hit_count: 1

@@ -1,0 +1,21 @@
+generated: '2026-09-05'
+method: searched
+source: registry searches, 2026-09-05
+packages: []
+note: >-
+  No first-party Concentrix client library exists on any public registry. The iX Hello Customer v2
+  APIs are documented as raw curl/HTTP only; the documentation never mentions an SDK, and neither
+  GitHub organization Concentrix nor Concentrix-Catalyst nor webhelp publishes a single public
+  repository (all three exist with public_repos = 0). An integrator writes the HTTP calls by hand.
+registries_probed:
+  - {registry: npm, query: concentrix, result: no first-party package, checked: '2026-09-05'}
+  - {registry: npm, query: ix-hello, result: no first-party package, checked: '2026-09-05'}
+  - {registry: pypi, query: 'concentrix / concentrixcx / ixhello', result: 404 on all, checked: '2026-09-05'}
+  - {registry: rubygems, query: concentrix, result: empty result set, checked: '2026-09-05'}
+  - {registry: crates.io, query: concentrix, result: 0 crates, checked: '2026-09-05'}
+  - {registry: nuget, query: concentrix, result: 0 hits, checked: '2026-09-05'}
+  - {registry: packagist, query: concentrix, result: 'only concentrix/module-corporate-group, a third-party code-challenge repo (github.com/paco44) — not first-party', checked: '2026-09-05'}
+github_orgs_probed:
+  - {org: 'https://github.com/Concentrix', public_repos: 0, checked: '2026-09-05'}
+  - {org: 'https://github.com/Concentrix-Catalyst', public_repos: 0, checked: '2026-09-05'}
+  - {org: 'https://github.com/webhelp', public_repos: 0, checked: '2026-09-05'}

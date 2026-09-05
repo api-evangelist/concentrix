@@ -1,0 +1,32 @@
+generated: '2026-09-05'
+method: searched
+source: https://docs.ixhello.com/ixhc2/integrations/outbound-calling-api-user-guide
+limit_count: 0
+note: >-
+  Concentrix documents that the iX Hello Customer v2 APIs are throttled — a 429 with code
+  RATE_LIMIT_EXCEEDED, "API Gateway request throttle exceeded" — but publishes no numeric limit,
+  no window, no burst allowance, and no rate-limit response headers. An integrator cannot size a
+  workload or back off intelligently from the published documentation; they can only observe the
+  429. Recorded as an honest zero rather than omitted.
+limits: []
+response_signals:
+  status_on_exhaustion: 429
+  error_code: RATE_LIMIT_EXCEEDED
+  headers: []
+  retry_after: false
+  note: No X-RateLimit-*, RateLimit-* or Retry-After header is documented.
+related_quotas:
+  - name: iX Hello token limit
+    scope: per user / per organization allocation of model tokens
+    published_value: null
+    docs: https://docs.ixhello.com/ixhello/how-to-guide/token-limit
+    note: >-
+      A product-level consumption quota on the iX Hello application (tokens consumed by chat,
+      speech-to-text, text-to-speech, title generation and image generation; usage refreshed every
+      5 minutes; a balance-threshold notification fires at a configured percentage). It is a
+      commercial allowance, not an API request rate limit, and the numeric allocation is set per
+      customer and not published.
+other_documented_ceilings:
+  - {name: session lifetime, value: 1 hour, docs: https://docs.ixhello.com/ixhc2/integrations/executing-flow-via-api-headless-execution/universal-messaging-api}
+  - {name: sync-mode call timeout, value: 30 seconds, docs: https://docs.ixhello.com/ixhc2/integrations/outbound-calling-api-user-guide}
+  - {name: outbound ring timeout, value: 30 seconds (default), docs: https://docs.ixhello.com/ixhc2/integrations/outbound-calling-api-user-guide}
