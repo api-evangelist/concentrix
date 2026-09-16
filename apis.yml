@@ -48,6 +48,18 @@ tags:
   - Enterprise Services
   - Contact Center
   - Voice
+  - Webhook
+  - Fortune 500
+tags_raw:
+  - AI Agents
+  - Business Process Outsourcing
+  - Consulting
+  - Conversational AI
+  - Customer Experience
+  - Digital Transformation
+  - Enterprise Services
+  - Contact Center
+  - Voice
   - Webhooks
   - Fortune 500
 created: '2026-03-21'
@@ -67,6 +79,13 @@ apis:
     humanURL: https://docs.ixhello.com/ixhc2/integrations/executing-flow-via-api-headless-execution/universal-messaging-api
     baseURL: https://api.vnext.ixhello.com
     tags:
+      - AI Agents
+      - Conversational AI
+      - Customer Experience
+      - Chatbots
+      - Workflow-Automation
+      - Contact Center
+    tags_raw:
       - AI Agents
       - Conversational AI
       - Customer Experience
@@ -101,6 +120,13 @@ apis:
     humanURL: https://docs.ixhello.com/ixhc2/integrations/outbound-calling-api-user-guide
     baseURL: https://api.vnext.ixhello.com
     tags:
+      - Voice
+      - Outbound Calling
+      - Telephony
+      - Conversational AI
+      - Contact Center
+      - Webhook
+    tags_raw:
       - Voice
       - Outbound Calling
       - Telephony
