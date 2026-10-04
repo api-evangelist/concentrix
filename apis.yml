@@ -38,6 +38,9 @@ description: >-
   signed webhook callbacks, documented at docs.ixhello.com. There is no OpenAPI, no SDK, no
   self-service signup and no published pricing — keys are issued per organization by the product
   team, so the API is real but sales-gated.
+x-docs-platform: gitbook
+x-docs-platform-confidence: high
+x-docs-platform-checked: 2026-09-24
 tags:
   - AI Agents
   - Business Process Outsourcing
@@ -83,7 +86,7 @@ apis:
       - Conversational AI
       - Customer Experience
       - Chatbots
-      - Workflow-Automation
+      - Workflow Automation
       - Contact Center
     tags_raw:
       - AI Agents
@@ -92,6 +95,7 @@ apis:
       - Chatbots
       - Workflow Automation
       - Contact Center
+      - Workflow-Automation
     properties:
       - type: Documentation
         url: https://docs.ixhello.com/ixhc2/integrations/executing-flow-via-api-headless-execution

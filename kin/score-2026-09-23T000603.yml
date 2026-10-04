@@ -1,36 +1,34 @@
-# Kin Score artifact — concentrix — 2026-08-28T221322
+# Kin Score artifact — concentrix — 2026-09-23T000603
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: concentrix
-  schema_version: 0.15.1
-  scored_at: '2026-08-28'
-  run_ts: 2026-08-28T221322
-  composite: 5.8
-  band: minimal
+  schema_version: 0.22.0
+  scored_at: '2026-09-23'
+  run_ts: 2026-09-23T000603
+  composite: 38.0
+  band: thin
   facets:
-    discoverability: 50.0
-    contract_quality: 0.0
-    governance: 0.0
-    operational_transparency: 2.6
-    developer_ergonomics: 2.4
-    commercial_clarity: 0.0
-    contract_governance: 0.0
-    access_clarity: 0.0
+    discoverability: 75.9
+    contract_quality: 41.6
+    contract_governance: 18.2
+    operational_transparency: 26.3
+    developer_ergonomics: 54.8
+    access_clarity: 17.1
   agent_readiness:
-    score: 0.0
-    band: human-only
+    score: 29.1
+    band: agent-ready
     dimensions:
-      spec_presence: false
+      spec_presence: true
       agentic_access: false
       reversibility_documented: false
       mcp_server: false
-      auth_clarity: false
+      auth_clarity: served
       idempotency: false
-      error_semantics: false
+      error_semantics: documented
       openapi_examples: false
-      rate_limit_signal: false
-      event_surface_described: false
+      rate_limit_signal: documented
+      event_surface_described: true
       agent_skills: false
       well_known_catalog: false
       consent_identity: false
@@ -40,3 +38,6 @@ kin_score:
       protected_resource_metadata: false
       dynamic_client_registration: false
       agentic_commerce: false
+  provenance:
+    mcp: derived
+    conformance: first-party
