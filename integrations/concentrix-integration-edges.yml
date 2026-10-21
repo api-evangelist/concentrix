@@ -103,6 +103,61 @@ edges:
       lapsed: false
   detected_by: sweep-professional-services.py
   first_seen: '2026-10-19'
+- partner_name: Salesforce AppExchange Security Review
+  partner: salesforce
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://developer.salesforce.com/docs/atlas.en-us.packagingGuide.meta/packagingGuide/security_review_overview.htm
+  category: AppExchange security-reviewed publisher
+  contract_reference:
+    register: Salesforce AppExchange public listings (listing JSON) under the AgentExchange Security Review requirement
+    standard: Salesforce AppExchange Security Review
+    spec_file: null
+    role: security-reviewed-publisher
+    registered_name: Concentrix
+    register_country: null
+    matched_domain: concentrix.com
+    matched_by: domain+name-among-holders
+    identity_source: the listing's own publisher.website (no lookup)
+    certified_products:
+    - product: Salesforce package (security-reviewed)
+      product_type: force/package
+      certifier: Salesforce (AgentExchange / AppExchange Security Review)
+      listings: 2
+      example_listing: https://appexchange.salesforce.com/appxListingDetail?listingId=5ecb2079-9651-414c-af1c-9d0f9ab3d48d
+      latest_approval: '2024-06-25'
+      lapsed: false
+      lapsed_note: the listing JSON prints solution.securityReview.approvalDate on a LIVE public listing; Salesforce
+        publishes no expiry, so no entry is marked lapsed (latest_approval is context)
+    signal_note: certified_products = ONE entry per product type (listing technology) with a printed securityReview.approvalDate,
+      never per listing or version; a listing with no approval date reads nothing; listing counts / versions are
+      context
+    requirement: https://developer.salesforce.com/docs/atlas.en-us.packagingGuide.meta/packagingGuide/security_review_overview.htm
+    detected_by: sweep-salesforce-appexchange.py
+    detected: '2026-10-21'
+  detected_by: sweep-salesforce-appexchange.py
+  first_seen: '2026-10-21'
+- partner_name: Salesforce (own)
+  partner: salesforce
+  partner_match: mirror
+  mirror_match: domain+name-among-holders
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://appexchange.salesforce.com/appxListingDetail?listingId=a0N4V00000J1rbKUAR
+  mirror_of: salesforce/integrations/salesforce-integration-edges.yml
+  apps:
+  - Concentrix Marketing Engagement Platform (MEP)
+  - Concentrix Connected Care Platform (CCP)
+  listing_count: 1
+  detected: '2026-10-21'
+  detected_by: mirror-platform-listings.py
+  category: analytics
 generated: '2026-10-19'
 method: searched
 source:
@@ -117,3 +172,10 @@ checked:
 - https://app.hubspot.com/api/chirp-frontend-external/v1/gateway/com.hubspot.marketplace.personalization.rpc.PersonalizationPublicRpc/search?hs_static_app=marketplace-storefront-public-ui&hs_static_app_version=1.13519
 - https://www.databricks.com/en-partners-assets/data/partner/all/en.json
 - https://www.snowflake.com/content/snowflake-site/global/en/why-snowflake/partners/all-partners/_jcr_content/root/responsivegrid/container/container/filterable_resources.filter.json?offset=0
+- https://api.appexchange.salesforce.com/recommendations/v3/listings?type=apps
+- https://api.appexchange.salesforce.com/recommendations/v3/listings?type=consultants
+- https://appexchange.salesforce.com/
+- https://appexchange.salesforce.com/consulting
+- https://developer.salesforce.com/docs/atlas.en-us.packagingGuide.meta/packagingGuide/security_review_overview.htm
+- https://slack.com/marketplace
+- salesforce/integrations/salesforce-integration-edges.yml
