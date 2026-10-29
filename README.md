@@ -1,4 +1,4 @@
-# Concentrix (concentrix)
+# Concentrix
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,46 +64,112 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Concentrix is a global technology and services leader providing customer experience (CX) management, digital transformation, and technology consulting across approximately 2,000 brands worldwide. Its product suite spans the iX product line (including iX Hello and iX Hero agentic AI assistants) and the Catalyst experience transformation and technology consultancy. Concentrix does not publish a public developer API; the iX product suite and Catalyst services are delivered via managed engagements and enterprise integrations rather than a self-service developer portal.
+Concentrix is a global technology and services company delivering customer experience management, digital transformation and technology consulting for roughly 2,000 brands. Its product line is the iX suite — iX Hello (customer- and employee-facing AI assistants), iX Hero (an agent desktop) and iX Hello Customer v2 (a flow-based conversational platform) — alongside Catalyst, its experience and engineering consultancy. iX Hello Customer v2 is the one genuinely callable surface: Concentrix publishes REST APIs on api.vnext.ixhello.com for headless flow execution, stateful conversational sessions and programmatic outbound PSTN/SIP calling, with signed webhook callbacks, documented at docs.ixhello.com. There is no OpenAPI, no SDK, no self-service signup and no published pricing — keys are issued per organization by the product team, so the API is real but sales-gated.
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/concentrix/refs/heads/main/apis.yml)
+**Areas:** AI Agents · Business Process Outsourcing · Consulting · Conversational AI · Customer Experience · Digital Transformation · Enterprise Services · Contact Center · Voice · Webhook · Fortune 500
 
-## Scope
+## Concentrix on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
-- **x-type:** company
+Everything profiled for Concentrix is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/concentrix/](https://apis.io/providers/concentrix/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (2)
 
-- AI Agents, Business Process Outsourcing, Consulting, Customer Experience, Digital Transformation, Enterprise Services, Fortune 500
+- [iX Hello Customer v2 Universal Messaging API](https://apis.io/apis/concentrix/ix-hello-customer-v2-universal-messaging-api/) — Headless flow-execution API for iX Hello Customer v2. Starts a stateful conversational session against an authored flow, sends user turns into it, reads…
+- [iX Hello Customer v2 Outbound Calling API](https://apis.io/apis/concentrix/ix-hello-customer-v2-outbound-calling-api/) — Places outbound PSTN and SIP voice calls programmatically and runs an authored iX Hello flow on the call. Three result-delivery modes — synchronous…
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-21
-- **Modified:** 2026-04-28
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-Concentrix does not publish a self-service public developer API. The iX product suite and Catalyst services are delivered through managed engagements and enterprise integrations. Specific iX Hello and iX Hero deployments may expose tenant-scoped APIs, but those are provisioned per-customer and not publicly documented.
+Event-driven and webhook contracts.
 
-## Common Properties
+- [Concentrix Ix Hello Webhooks](https://apis.io/asyncapis/concentrix/concentrix-ix-hello-webhooks/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Concentrix Authentication](https://apis.io/security/concentrix/concentrix-authentication/)
+- [Concentrix Domain Security](https://apis.io/security/concentrix/concentrix-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Concentrix Plans Pricing](https://apis.io/plans/concentrix/concentrix-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Concentrix Rate Limits](https://apis.io/rate-limits/concentrix/concentrix-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.concentrix.com)
-- [iX Product Suite](https://www.concentrix.com/ix-product-suite/)
-- [iX Hello](https://www.concentrix.com/ix-hello/)
-- [iX Hero](https://www.concentrix.com/ix-hero/)
-- [Catalyst](https://www.concentrix.com/catalyst/)
-- [Newsroom](https://www.concentrix.com/about/news/)
-- [Investor Relations](https://investor.concentrix.com)
-- [Careers](https://www.concentrix.com/careers/)
-- [Contact](https://www.concentrix.com/contact-us/)
-- [Privacy Policy](https://www.concentrix.com/privacy-policy/)
-- [Terms of Use](https://www.concentrix.com/terms-of-use/)
+- [Documentation](https://docs.ixhello.com/)
+- [Getting started](https://docs.ixhello.com/welcome-to-ix-hello)
+- [API reference](https://docs.ixhello.com/ixhc2/integrations/outbound-calling-api-user-guide)
+- [Support](https://docs.ixhello.com/ixhc2/administration/support)
+- [Blog](https://www.concentrix.com/feed/)
+- [Terms of service](https://www.concentrix.com/wp-content/uploads/2024/04/Concentrix-Website-Terms-of-Use.pdf)
+- [Privacy policy](https://www.concentrix.com/privacy-policy/)
+- [GitHub](https://github.com/Concentrix)
+- [Status](https://ixhellosidekick.statuspage.io/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
+**Kin Score 37.5** — thin · rubric 0.24.0 · scored 2026-10-17
 
-**Email:** kin@apievangelist.com
+| Facet | Score |
+|---|---|
+| Discoverability | 74.1 |
+| Contract quality | 39.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 54.8 |
+| Access clarity | 17.1 |
+
+**Agent readiness 29.1** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.6** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/concentrix/](https://apis.io/providers/concentrix/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Concentrix: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/concentrix/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
